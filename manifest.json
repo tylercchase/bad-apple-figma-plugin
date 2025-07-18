@@ -1,0 +1,19 @@
+{
+  "name": "bad-apple",
+  "id": "1527709517599899965",
+  "api": "1.0.0",
+  "main": "code.js",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "documentAccess": "dynamic-page",
+  "editorType": [
+    "figjam"
+  ],
+  "ui": "ui.html",
+  "networkAccess": {
+    "allowedDomains": [
+      "https://github.com",
+      "https://raw.githubusercontent.com"
+    ]
+  }
+}

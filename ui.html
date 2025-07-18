@@ -1,0 +1,63 @@
+<style>
+#bad-apple-canvas {
+	width: 100px;
+	height: 100px;
+}
+#bad-apple-video {
+	width: 100px;
+	height: 100px;
+}
+</style>
+<button id="start">Start</button>
+test
+<video
+src="https://github.com/Felixoofed/badapple-frames/raw/refs/heads/main/badapple.mp4"
+  id="bad-apple-video"
+  className="test"
+  controls
+></video>
+<canvas id="bad-apple-canvas"></canvas>
+<script>
+
+
+document.getElementById('start').onclick = onStartButton
+
+function setupBoard() {
+  const video = document.getElementById("bad-apple-video");
+
+
+  video.addEventListener("loadeddata", () => {
+    animate();
+  });
+}
+
+function animate() {
+  const video = document.getElementById("bad-apple-video");
+  const canvas = document.getElementById(
+    "bad-apple-canvas"
+  );
+  const width = 100;
+  const height = 100;
+
+  const context = canvas.getContext("2d");
+
+  var image = new Image();
+  image.id = "pic";
+  image.crossOrigin = 'Anonymous';
+  image.src = canvas.toDataURL();
+  context.drawImage(image, 0, 0);
+  // parent.postMessage({type: 'data', imageData: context.getImageData(0,0,width,height)})
+  setTimeout(requestAnimationFrame.bind(null, animate), 10000);
+
+}
+
+function onStartButton() {
+  const video = document.getElementById('bad-apple-video');
+  video.play();
+  // video.currentTime = 20.0;
+  animate();
+  parent.postMessage({type: 'start'});
+
+}
+
+</script>
