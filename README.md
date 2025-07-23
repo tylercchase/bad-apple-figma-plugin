@@ -1,3 +1,9 @@
+## Setup
+Needs a board of 20x20 sticky notes, it does not do any checking to make sure the format is correct.
+Needs some host of the bad apple video, and cross-origin headers setup to let the plugin access video data easily.
+
+
+## Auto-generated Docs
 Below are the steps to get your plugin running. You can also find instructions at:
 
   https://www.figma.com/plugin-docs/plugin-quickstart-guide/
