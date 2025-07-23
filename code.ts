@@ -37,18 +37,18 @@ function animate(data: any) {
   const boardNotes = getBoard();
   const width = 100;
   const height = 100;
+  // actual 40x40
 
-  const step = 10;
+  const step = 5;
   for (let x = 0; x < width; x += step) {
     for (let y = 0; y < height; y += step) {
       const i = (y * width + x) * 4;
-      const boardIndex = (y/step * 10 + (x/step));
-      console.log(boardIndex)
+      const boardIndex = (y/step * 40 + (x/step));
       if (data[i] === 0) {
-        setShapeFill(boardNotes[boardIndex], true)
+        setShapeFill(boardNotes[boardIndex], false)
         // should show black
       } else {
-        setShapeFill(boardNotes[boardIndex], false)
+        setShapeFill(boardNotes[boardIndex], true)
         // should show white 
       }
     }

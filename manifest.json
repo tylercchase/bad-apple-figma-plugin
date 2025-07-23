@@ -11,6 +11,9 @@
   ],
   "ui": "ui.html",
   "networkAccess": {
+    "devAllowedDomains": [
+      "http://localhost:8000"
+    ],
     "allowedDomains": [
       "https://github.com",
       "https://raw.githubusercontent.com"

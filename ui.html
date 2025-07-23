@@ -1,27 +1,26 @@
 <style>
-#bad-apple-canvas {
-	width: 100px;
-	height: 100px;
-}
+
 #bad-apple-video {
 	width: 100px;
 	height: 100px;
 }
 </style>
 <button id="start">Start</button>
+<button id="stop">Stop</button>
 test
 <video
-src="https://github.com/Felixoofed/badapple-frames/raw/refs/heads/main/badapple.mp4"
+src="http://localhost:8000/bad_apple.mp4"
   id="bad-apple-video"
   className="test"
+  crossOrigin="anonymous"
   controls
 ></video>
-<canvas id="bad-apple-canvas"></canvas>
+<canvas id="bad-apple-canvas" willReadFrequently="true" width="100" height="100" ></canvas>
 <script>
 
 
 document.getElementById('start').onclick = onStartButton
-
+document.getElementById('stop').onclick = onStopButton
 function setupBoard() {
   const video = document.getElementById("bad-apple-video");
 
@@ -33,6 +32,9 @@ function setupBoard() {
 
 function animate() {
   const video = document.getElementById("bad-apple-video");
+  if(window.test){
+    return
+  }
   const canvas = document.getElementById(
     "bad-apple-canvas"
   );
@@ -41,13 +43,10 @@ function animate() {
 
   const context = canvas.getContext("2d");
 
-  var image = new Image();
-  image.id = "pic";
-  image.crossOrigin = 'Anonymous';
-  image.src = canvas.toDataURL();
-  context.drawImage(image, 0, 0);
-  // parent.postMessage({type: 'data', imageData: context.getImageData(0,0,width,height)})
-  setTimeout(requestAnimationFrame.bind(null, animate), 10000);
+  context.drawImage(video, 0, 0, 100, 100);
+  window.parent.postMessage({pluginMessage: {type: 'data', data:context.getImageData(0,0,width,height).data}
+}, '*')
+  setTimeout(requestAnimationFrame.bind(null, animate), 50);
 
 }
 
@@ -56,8 +55,16 @@ function onStartButton() {
   video.play();
   // video.currentTime = 20.0;
   animate();
-  parent.postMessage({type: 'start'});
+  window.parent.postMessage({pluginMessage: {type: 'start'}}, '*');
+  document.getElementById('start').disabled = true
+  document.getElementById('stop').disabled = false
+}
 
+function onStopButton() {
+  document.getElementById('start').disabled = false
+  document.getElementById('stop').disabled = true
+  document.getElementById('bad-apple-video').pause()
+  window.test = true
 }
 
 </script>
